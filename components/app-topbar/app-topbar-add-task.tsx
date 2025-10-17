@@ -2,6 +2,7 @@
 
 import Form from "next/form"
 import { memo, useState } from "react"
+import { toast } from "sonner"
 
 import { taskCreate } from "@/app/actions/task-actions"
 import RegularDialog from "@/components/dialogs/regular-dialog"
@@ -14,7 +15,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import useDirectories from "@/hooks/use-directories"
 import { useIsMobile } from "@/hooks/use-mobile"
-import { toast } from "@/hooks/use-toast"
 
 import SubmitButton from "../helpers/submit-button"
 
@@ -25,17 +25,9 @@ function AddTask() {
 
   const handleAction = async (f: FormData) => {
     if (await taskCreate(f)) {
-      toast({
-        description: "Task created successfully.",
-        title: "Success",
-      })
+      toast("Success", { description: "Task created successfully." })
       setIsOpen(false)
-    } else
-      toast({
-        description: "Failed to create task.",
-        title: "Error",
-        variant: "destructive",
-      })
+    } else toast("Error", { description: "Failed to create task." })
   }
 
   return (

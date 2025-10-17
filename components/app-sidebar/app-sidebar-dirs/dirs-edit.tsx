@@ -3,6 +3,7 @@
 import { Pencil } from "lucide-react"
 import Form from "next/form"
 import { useState } from "react"
+import { toast } from "sonner"
 
 import { directoryEdit } from "@/app/actions/directory-actions"
 import RegularDialog from "@/components/dialogs/regular-dialog"
@@ -11,7 +12,6 @@ import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import useDirectories from "@/hooks/use-directories"
-import { toast } from "@/hooks/use-toast"
 
 function EditDirectory({ id }: { id: number }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,18 +19,10 @@ function EditDirectory({ id }: { id: number }) {
 
   const handleAction = async (f: FormData) => {
     if (await directoryEdit(f, id)) {
-      toast({
-        description: "Directory name updated successfully.",
-        title: "Edition success",
-      })
+      toast("Edition success", { description: "Directory name updated successfully." })
       refresh()
       setIsOpen(false)
-    } else
-      toast({
-        description: "Failed to edit the directory.",
-        title: "Edition failed",
-        variant: "destructive",
-      })
+    } else toast("Edition failed", { description: "Failed to edit the directory." })
   }
 
   return (

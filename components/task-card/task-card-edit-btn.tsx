@@ -3,11 +3,11 @@
 import { Pencil } from "lucide-react"
 import Form from "next/form"
 import { memo, useState } from "react"
+import { toast } from "sonner"
 
 import { taskEdit } from "@/app/actions/task-actions"
 import RegularDialog from "@/components/dialogs/regular-dialog"
 import { Button } from "@/components/ui/button"
-import { toast } from "@/hooks/use-toast"
 
 import type { TaskCardPropsType } from "./task-card-index"
 
@@ -23,17 +23,9 @@ function TaskCardEditBtn(props: TaskCardPropsType) {
 
   const handleAction = async (f: FormData) => {
     if (await taskEdit(props.id, f)) {
-      toast({
-        description: "The task has been successfully updated.",
-        title: "Success",
-      })
+      toast("Success", { description: "The task has been successfully updated." })
       setIsOpen(false)
-    } else
-      toast({
-        description: "There was an error updating the task. Please try again.",
-        title: "Error",
-        variant: "destructive",
-      })
+    } else toast("Error", { description: "There was an error updating the task. Please try again." })
   }
 
   return (

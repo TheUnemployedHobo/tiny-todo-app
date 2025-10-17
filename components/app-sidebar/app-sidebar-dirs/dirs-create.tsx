@@ -3,6 +3,7 @@
 import { Plus } from "lucide-react"
 import Form from "next/form"
 import { useState } from "react"
+import { toast } from "sonner"
 
 import { directoryCreate } from "@/app/actions/directory-actions"
 import RegularDialog from "@/components/dialogs/regular-dialog"
@@ -11,7 +12,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { SidebarMenuButton } from "@/components/ui/sidebar"
 import useDirectories from "@/hooks/use-directories"
-import { toast } from "@/hooks/use-toast"
 
 function CreateDirectory() {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,18 +19,10 @@ function CreateDirectory() {
 
   const handleAction = async (f: FormData) => {
     if (await directoryCreate(f)) {
-      toast({
-        description: `Directory created successfully.`,
-        title: "Success",
-      })
+      toast("Success", { description: `Directory created successfully.` })
       refresh()
       setIsOpen(false)
-    } else
-      toast({
-        description: "Failed to create directory.",
-        title: "Error",
-        variant: "destructive",
-      })
+    } else toast("Error", { description: "Failed to create directory." })
   }
 
   return (

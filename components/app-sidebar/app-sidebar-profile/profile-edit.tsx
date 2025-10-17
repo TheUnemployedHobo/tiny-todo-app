@@ -2,6 +2,7 @@
 
 import Form from "next/form"
 import { redirect } from "next/navigation"
+import { toast } from "sonner"
 
 import { userUpdateCredits } from "@/app/actions/user-actions"
 import RegularDialog from "@/components/dialogs/regular-dialog"
@@ -9,27 +10,19 @@ import SubmitButton from "@/components/helpers/submit-button"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { toast } from "@/hooks/use-toast"
 import { deleteCookie } from "@/lib/utils"
 
 function EditCredentialsForm() {
   const handleAction = async (f: FormData) => {
     if (await userUpdateCredits(f)) {
-      toast({
-        description: "You're now signed out and your credentials are updated",
-        title: "Credentials updated",
-      })
+      toast("Credentials updated", { description: "You're now signed out and your credentials are updated" })
 
       deleteCookie("token")
 
       redirect("/sign-in")
     }
 
-    toast({
-      description: "Please try again later",
-      title: "Failed to update credentials",
-      variant: "destructive",
-    })
+    toast("Failed to update credentials", { description: "Please try again later" })
   }
 
   return (
