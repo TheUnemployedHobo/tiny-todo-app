@@ -30,7 +30,7 @@ function DatePicker({ defaultValue, name }: PropsType) {
       <Popover>
         <PopoverTrigger asChild>
           <Button className="w-full justify-start text-left" variant="outline">
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <CalendarIcon className="mr-2 size-4" />
             {formatDate(date)}
           </Button>
         </PopoverTrigger>

@@ -37,7 +37,7 @@ function TaskCardWrapper({ tasks }: PropsType) {
     : sortedTasks
 
   return (
-    <ScrollArea className="h-[calc(100vh-304px)] lg:h-[calc(100vh-236px)]">
+    <ScrollArea className="h-[calc(100vh-272px)] lg:h-[calc(100vh-208px)]">
       {finalData.length === 0 ? (
         <BigMessage Icon={<CircleSlash2 size={32} />} text="Empty." />
       ) : (

@@ -30,7 +30,7 @@ function CreateDirectory() {
       content={
         <Form action={handleAction} className="w-full space-y-5">
           <Label className="block space-y-2">
-            <span>Directory name</span>
+            <span className="block">Directory name</span>
             <Input maxLength={20} name="dir-name" placeholder="ex: financial" required type="text" />
           </Label>
           <SubmitButton text="Add directory" />

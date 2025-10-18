@@ -30,7 +30,7 @@ function EditDirectory({ id }: { id: number }) {
       content={
         <Form action={handleAction} className="w-full space-y-5">
           <Label className="block space-y-2">
-            <span>New directory name</span>
+            <span className="block">New directory name</span>
             <Input maxLength={20} name="dir-name" placeholder="ex: financial" required type="text" />
           </Label>
           <SubmitButton text="Edit directory" />
@@ -41,7 +41,7 @@ function EditDirectory({ id }: { id: number }) {
       title="Edit current directory name"
       trigger={
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <Pencil className="mr-2 h-4 w-4" />
+          <Pencil className="mr-2 size-4" />
           <span>Edit</span>
         </DropdownMenuItem>
       }

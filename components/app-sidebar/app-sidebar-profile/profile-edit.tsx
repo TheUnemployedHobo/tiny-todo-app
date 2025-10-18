@@ -29,8 +29,8 @@ function EditCredentialsForm() {
     <RegularDialog
       content={
         <Form action={handleAction} className="flex flex-grow flex-col gap-y-5">
-          <Label className="space-y-2">
-            <span>Username</span>
+          <Label className="block space-y-2">
+            <span className="block">Username</span>
             <Input
               name="username"
               pattern="^[a-z]{3,100}$"
@@ -39,12 +39,12 @@ function EditCredentialsForm() {
               type="text"
             />
           </Label>
-          <Label className="space-y-2">
-            <span>Previous password</span>
+          <Label className="block space-y-2">
+            <span className="block">Previous password</span>
             <Input minLength={8} name="prev-password" placeholder="e.g admin" type="password" />
           </Label>
-          <Label className="space-y-2">
-            <span>New password</span>
+          <Label className="block space-y-2">
+            <span className="block">New password</span>
             <Input minLength={8} name="new-password" placeholder="e.g admin" type="password" />
           </Label>
           <SubmitButton text="Update credentials" />

@@ -20,7 +20,7 @@ function TaskCardImportantBtn({ id, isImportant }: PropsType) {
 
   return (
     <Button onClick={handleAction} size="icon" variant="ghost">
-      <Star fill={important ? "hsl(var(--foreground))" : "transparent"} />
+      <Star fill={important ? "var(--foreground)" : "transparent"} />
     </Button>
   )
 }

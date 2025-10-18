@@ -55,7 +55,7 @@ function DropDown({ id }: { id: number }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="h-8 w-8 p-0" variant="ghost">
+        <Button className="size-8 p-0" variant="ghost">
           <MoreHorizontal />
         </Button>
       </DropdownMenuTrigger>

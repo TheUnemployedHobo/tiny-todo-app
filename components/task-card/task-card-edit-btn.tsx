@@ -32,8 +32,8 @@ function TaskCardEditBtn(props: TaskCardPropsType) {
     <RegularDialog
       content={
         <Form action={handleAction} className="flex flex-grow flex-col gap-y-5">
-          <Label className="space-y-2">
-            <span>Title</span>
+          <Label className="block space-y-2">
+            <span className="block">Title</span>
             <Input
               defaultValue={props.title}
               maxLength={35}
@@ -44,12 +44,12 @@ function TaskCardEditBtn(props: TaskCardPropsType) {
               type="text"
             />
           </Label>
-          <Label className="space-y-2">
-            <span>Deadline</span>
+          <Label className="block space-y-2">
+            <span className="block">Deadline</span>
             <DatePicker defaultValue={props.deadline} name="deadline" />
           </Label>
-          <Label className="space-y-2">
-            <span>Description</span>
+          <Label className="block space-y-2">
+            <span className="block">Description</span>
             <Textarea
               defaultValue={props.description}
               maxLength={100}
@@ -59,11 +59,11 @@ function TaskCardEditBtn(props: TaskCardPropsType) {
           </Label>
           <Label className="flex items-center gap-x-2">
             <Checkbox defaultChecked={props.isImportant} name="is-important" />
-            <span>Mark as important</span>
+            <span className="block">Mark as important</span>
           </Label>
           <Label className="flex items-center gap-x-2">
             <Checkbox defaultChecked={props.isCompleted} name="is-completed" />
-            <span>Mark as completed</span>
+            <span className="block">Mark as completed</span>
           </Label>
           <SubmitButton text="Edit task info" />
         </Form>

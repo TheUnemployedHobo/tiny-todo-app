@@ -24,7 +24,7 @@ function DeleteDirectory({ id }: { id: number }) {
       description="This action will delete the directory and all its tasks."
       trigger={
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <Trash className="mr-2 h-4 w-4" />
+          <Trash className="mr-2 size-4" />
           <span>Delete</span>
         </DropdownMenuItem>
       }

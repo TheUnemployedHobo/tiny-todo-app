@@ -34,8 +34,8 @@ function AddTask() {
     <RegularDialog
       content={
         <Form action={handleAction} className="flex flex-grow flex-col gap-y-5">
-          <Label className="space-y-2">
-            <span>Title</span>
+          <Label className="block space-y-2">
+            <span className="block">Title</span>
             <Input
               maxLength={35}
               minLength={3}
@@ -45,20 +45,20 @@ function AddTask() {
               type="text"
             />
           </Label>
-          <Label className="space-y-2">
-            <span>Deadline</span>
+          <Label className="block space-y-2">
+            <span className="block">Deadline</span>
             <DatePicker name="deadline" />
           </Label>
-          <Label className="space-y-2">
-            <span>Description</span>
+          <Label className="block space-y-2">
+            <span className="block">Description</span>
             <Textarea
               maxLength={100}
               name="description"
               placeholder="Describe the task in detail (optional, up to 100 characters)"
             />
           </Label>
-          <Label className="space-y-2">
-            <span>Directory</span>
+          <Label className="block space-y-2">
+            <span className="block">Directory</span>
             <Select name="dir-id" required>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Choose a directory" />
