@@ -18,14 +18,14 @@ export const taskGet = async () => {
 
   return response.json() as Promise<
     {
-      id: number
-      title: string
-      description: string
-      deadline: string
-      isImportant: boolean
-      isCompleted: boolean
-      dirName: string
       createdAt: string
+      deadline: string
+      description: string
+      dirName: string
+      id: number
+      isCompleted: boolean
+      isImportant: boolean
+      title: string
     }[]
   >
 }
@@ -35,22 +35,22 @@ export const taskCreate = async (f: FormData) => {
   const deadline = f.get("deadline") as string
   const description = f.get("description") as string
   const dirId = f.get("dir-id") as string
-  const isImportant = f.get("is-important") as string | null
-  const isCompleted = f.get("is-completed") as string | null
+  const isImportant = f.get("is-important") as null | string
+  const isCompleted = f.get("is-completed") as null | string
 
   const cookie = await cookies()
   const { value } = cookie.get("token")!
 
   const response = await fetch(`${BASE_URL}/api/tasks/${dirId}`, {
-    method: "POST",
-    headers: { authorization: value },
     body: JSON.stringify({
-      title,
-      description,
       deadline,
-      isImportant: isImportant === "on",
+      description,
       isCompleted: isCompleted === "on",
+      isImportant: isImportant === "on",
+      title,
     }),
+    headers: { authorization: value },
+    method: "POST",
   })
 
   revalidateTag("tasks")
@@ -62,22 +62,22 @@ export const taskEdit = async (id: number, f: FormData) => {
   const title = f.get("title") as string
   const deadline = f.get("deadline") as string
   const description = f.get("description") as string
-  const isImportant = f.get("is-important") as string | null
-  const isCompleted = f.get("is-completed") as string | null
+  const isImportant = f.get("is-important") as null | string
+  const isCompleted = f.get("is-completed") as null | string
 
   const cookie = await cookies()
   const { value } = cookie.get("token")!
 
   const response = await fetch(`${BASE_URL}/api/tasks/${id}`, {
-    method: "PUT",
-    headers: { authorization: value },
     body: JSON.stringify({
-      title,
-      description,
       deadline,
-      isImportant: isImportant === "on",
+      description,
       isCompleted: isCompleted === "on",
+      isImportant: isImportant === "on",
+      title,
     }),
+    headers: { authorization: value },
+    method: "PUT",
   })
 
   revalidateTag("tasks")
@@ -90,11 +90,11 @@ export const taskComplete = async (id: number, isCompleted: boolean) => {
   const { value } = cookie.get("token")!
 
   const response = await fetch(`${BASE_URL}/api/tasks/${id}`, {
-    method: "PUT",
-    headers: { authorization: value },
     body: JSON.stringify({
       isCompleted,
     }),
+    headers: { authorization: value },
+    method: "PUT",
   })
 
   revalidateTag("tasks")
@@ -107,11 +107,11 @@ export const taskImportant = async (id: number, isImportant: boolean) => {
   const { value } = cookie.get("token")!
 
   const response = await fetch(`${BASE_URL}/api/tasks/${id}`, {
-    method: "PUT",
-    headers: { authorization: value },
     body: JSON.stringify({
       isImportant,
     }),
+    headers: { authorization: value },
+    method: "PUT",
   })
 
   revalidateTag("tasks")
@@ -124,8 +124,8 @@ export const taskDelete = async (id: number) => {
   const { value } = cookie.get("token")!
 
   const response = await fetch(`${BASE_URL}/api/tasks/${id}`, {
-    method: "DELETE",
     headers: { authorization: value },
+    method: "DELETE",
   })
 
   revalidateTag("tasks")

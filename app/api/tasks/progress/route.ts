@@ -1,7 +1,9 @@
+import type { NextRequest } from "next/server"
+
+import { eq } from "drizzle-orm"
+
 import db from "@/app/api/db"
 import { directories, tasks } from "@/app/api/db/schema"
-import { eq } from "drizzle-orm"
-import type { NextRequest } from "next/server"
 
 export async function GET(req: NextRequest) {
   try {

@@ -1,4 +1,5 @@
-import { NextResponse, type MiddlewareConfig, type NextRequest } from "next/server"
+import { type MiddlewareConfig, type NextRequest, NextResponse } from "next/server"
+
 import { verifyJwToken } from "./lib/jwt-utils"
 
 const backToRoot = (req: NextRequest) => NextResponse.redirect(new URL("/", req.url), { status: 301 })

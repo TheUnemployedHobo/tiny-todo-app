@@ -1,5 +1,7 @@
-import { eq } from "drizzle-orm"
 import type { NextRequest } from "next/server"
+
+import { eq } from "drizzle-orm"
+
 import db from "../db"
 import { directories, tasks } from "../db/schema"
 
@@ -11,14 +13,14 @@ export async function GET(req: NextRequest) {
 
     const tasksByUser = await db
       .select({
-        id: tasks.id,
-        title: tasks.title,
-        description: tasks.description,
-        deadline: tasks.deadline,
-        isImportant: tasks.isImportant,
-        isCompleted: tasks.isCompleted,
-        dirName: directories.name,
         createdAt: tasks.createdAt,
+        deadline: tasks.deadline,
+        description: tasks.description,
+        dirName: directories.name,
+        id: tasks.id,
+        isCompleted: tasks.isCompleted,
+        isImportant: tasks.isImportant,
+        title: tasks.title,
       })
       .from(tasks)
       .innerJoin(directories, eq(tasks.directoryId, directories.id))

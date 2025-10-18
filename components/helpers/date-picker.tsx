@@ -1,20 +1,22 @@
 "use client"
 
+import { addDays, formatISO, parseISO } from "date-fns"
+import { CalendarIcon } from "lucide-react"
+import { useState } from "react"
+
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { formatDate } from "@/lib/utils"
-import { addDays, formatISO, parseISO } from "date-fns"
-import { CalendarIcon } from "lucide-react"
-import { useState } from "react"
+
 import { Input } from "../ui/input"
 
 type PropsType = {
-  name: string
   defaultValue?: string
+  name: string
 }
 
-function DatePicker({ name, defaultValue }: PropsType) {
+function DatePicker({ defaultValue, name }: PropsType) {
   const [date, setDate] = useState(() => {
     const currentDate = new Date()
 
@@ -27,21 +29,21 @@ function DatePicker({ name, defaultValue }: PropsType) {
     <>
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="outline" className="w-full justify-start text-left">
-            <CalendarIcon className="mr-2 h-4 w-4" />
+          <Button className="w-full justify-start text-left" variant="outline">
+            <CalendarIcon className="mr-2 size-4" />
             {formatDate(date)}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0">
           <Calendar
-            mode="single"
-            selected={date}
-            onSelect={(day) => day && setDate(day)}
             disabled={(date) => date < new Date()}
+            mode="single"
+            onSelect={(day) => day && setDate(day)}
+            selected={date}
           />
         </PopoverContent>
       </Popover>
-      <Input type="hidden" name={name} value={formatISO(date)} />
+      <Input name={name} type="hidden" value={formatISO(date)} />
     </>
   )
 }

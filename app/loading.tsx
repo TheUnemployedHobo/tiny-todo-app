@@ -1,6 +1,6 @@
 import BigMessage from "@/components/helpers/big-message"
-import { LoaderCircle } from "lucide-react"
+import { Spinner } from "@/components/ui/spinner"
 
 export default function Loading() {
-  return <BigMessage Icon={<LoaderCircle size={64} className="animate-spin" />} />
+  return <BigMessage Icon={<Spinner className="size-16" />} />
 }

@@ -1,9 +1,10 @@
 "use client"
 
+import { redirect } from "next/navigation"
+
 import AlertDialog from "@/components/dialogs/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { deleteCookie } from "@/lib/utils"
-import { redirect } from "next/navigation"
 
 function SignOutModal() {
   const handleClick = () => {
@@ -14,13 +15,13 @@ function SignOutModal() {
 
   return (
     <AlertDialog
+      actionFn={handleClick}
       description="You're about to get signed out. You can sign back in anytime you want."
       trigger={
-        <Button className="w-full" variant="outline" size="sm">
+        <Button className="w-full" size="sm" variant="outline">
           Sign out
         </Button>
       }
-      actionFn={handleClick}
     />
   )
 }

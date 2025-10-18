@@ -1,4 +1,4 @@
-import { SignJWT, jwtVerify } from "jose"
+import { jwtVerify, SignJWT } from "jose"
 import { z } from "zod"
 
 const secretKey = new TextEncoder().encode(process.env["JWT_SECRET_TOKEN"]!)
@@ -13,7 +13,7 @@ const authTokenSchema = z
 export const signJwToken = (userId: number) =>
   new SignJWT({ userId }).setProtectedHeader({ alg: "HS256" }).setIssuedAt().setExpirationTime("24h").sign(secretKey)
 
-export const verifyJwToken = async (jwToken: string | null) => {
+export const verifyJwToken = async (jwToken: null | string) => {
   try {
     const token = authTokenSchema.safeParse(jwToken)
 
@@ -22,9 +22,9 @@ export const verifyJwToken = async (jwToken: string | null) => {
     const { payload } = await jwtVerify(token.data!, secretKey)
 
     return payload as {
-      userId: number
-      iat: number
       exp: number
+      iat: number
+      userId: number
     }
   } catch (error) {
     console.error(error)

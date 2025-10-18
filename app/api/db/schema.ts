@@ -3,8 +3,8 @@ import { boolean, foreignKey, integer, pgTable, serial, text, timestamp, unique,
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
-  username: varchar("username", { length: 100 }).unique().notNull(),
   password: text("password").notNull(),
+  username: varchar("username", { length: 100 }).unique().notNull(),
 })
 
 export const directories = pgTable(
@@ -16,9 +16,9 @@ export const directories = pgTable(
   },
   (table) => [
     foreignKey({
-      name: "fk_user_directories",
       columns: [table.userId],
       foreignColumns: [users.id],
+      name: "fk_user_directories",
     })
       .onUpdate("cascade")
       .onDelete("cascade"),
@@ -27,31 +27,31 @@ export const directories = pgTable(
 )
 
 export const tasks = pgTable("tasks", {
-  id: serial("id").primaryKey(),
-  title: varchar("title", { length: 35 }).notNull(),
-  description: varchar("description", { length: 100 }).default(""),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
   deadline: timestamp("deadline").notNull(),
-  isImportant: boolean("is_important").default(false),
-  isCompleted: boolean("is_completed").default(false),
+  description: varchar("description", { length: 100 }).default(""),
   directoryId: integer("directory_id")
     .references(() => directories.id, {
-      onUpdate: "cascade",
       onDelete: "cascade",
+      onUpdate: "cascade",
     })
     .notNull(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
+  id: serial("id").primaryKey(),
+  isCompleted: boolean("is_completed").default(false),
+  isImportant: boolean("is_important").default(false),
+  title: varchar("title", { length: 35 }).notNull(),
 })
 
 export const usersRelations = relations(users, ({ many }) => ({
   directories: many(directories),
 }))
 
-export const directoriesRelations = relations(directories, ({ one, many }) => ({
+export const directoriesRelations = relations(directories, ({ many, one }) => ({
+  tasks: many(tasks),
   user: one(users, {
     fields: [directories.userId],
     references: [users.id],
   }),
-  tasks: many(tasks),
 }))
 
 export const tasksRelations = relations(tasks, ({ one }) => ({

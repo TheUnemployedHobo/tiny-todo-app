@@ -3,20 +3,20 @@
 import { create } from "zustand/react"
 
 type StateType = {
-  search: string
   renderMode: "grid" | "list"
-  sortBy: "Order added" | "Earlier first" | "Later first"
-  updateSearch: (text: string) => void
+  search: string
+  sortBy: "Earlier first" | "Later first" | "Order added"
   updateRenderMode: (mode: "grid" | "list") => void
-  updateSortBy: (by: "Order added" | "Earlier first" | "Later first") => void
+  updateSearch: (text: string) => void
+  updateSortBy: (by: "Earlier first" | "Later first" | "Order added") => void
 }
 
 const useFiltering = create<StateType>((set) => ({
-  search: "",
   renderMode: "grid",
+  search: "",
   sortBy: "Order added",
-  updateSearch: (text) => set((state) => ({ ...state, search: text })),
   updateRenderMode: (mode) => set((state) => ({ ...state, renderMode: mode })),
+  updateSearch: (text) => set((state) => ({ ...state, search: text })),
   updateSortBy: (by) => set((state) => ({ ...state, sortBy: by })),
 }))
 

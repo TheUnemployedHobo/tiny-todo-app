@@ -1,9 +1,11 @@
 "use client"
 
+import { startTransition, useOptimistic } from "react"
+
 import { taskComplete } from "@/app/actions/task-actions"
 import useTasksProgress from "@/hooks/use-tasks-progress"
 import { cn } from "@/lib/utils"
-import { startTransition, useOptimistic } from "react"
+
 import { Badge } from "../ui/badge"
 
 type PropsType = {

@@ -9,8 +9,8 @@ export const userSignIn = async (f: FormData) => {
   const password = f.get("password") as string
 
   const response = await fetch(`${BASE_URL}/api/users/sign-in`, {
+    body: JSON.stringify({ password, username }),
     method: "POST",
-    body: JSON.stringify({ username, password }),
   })
 
   if (!response.ok) return false
@@ -32,8 +32,8 @@ export const userSignUp = async (f: FormData) => {
   const password = f.get("password") as string
 
   const response = await fetch(`${BASE_URL}/api/users/sign-up`, {
+    body: JSON.stringify({ password, username }),
     method: "POST",
-    body: JSON.stringify({ username, password }),
   })
 
   return response.ok
@@ -48,13 +48,13 @@ export const userUpdateCredits = async (f: FormData) => {
   const { value } = cookie.get("token")!
 
   const response = await fetch(`${BASE_URL}/api/users`, {
-    method: "PUT",
-    headers: { authorization: value },
     body: JSON.stringify({
-      username: username || null,
-      prevPassword: prevPassword || null,
       newPassword: newPassword || null,
+      prevPassword: prevPassword || null,
+      username: username || null,
     }),
+    headers: { authorization: value },
+    method: "PUT",
   })
 
   return response.ok
@@ -65,8 +65,8 @@ export const userDeleteAcc = async () => {
   const { value } = cookie.get("token")!
 
   const response = await fetch(`${BASE_URL}/api/users`, {
-    method: "DELETE",
     headers: { authorization: value },
+    method: "DELETE",
   })
 
   return response.ok

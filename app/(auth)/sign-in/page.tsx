@@ -1,31 +1,25 @@
 "use client"
 
+import Form from "next/form"
+import Link from "next/link"
+import { redirect } from "next/navigation"
+import { toast } from "sonner"
+
 import { userSignIn } from "@/app/actions/user-actions"
 import SubmitButton from "@/components/helpers/submit-button"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { toast } from "@/hooks/use-toast"
-import Form from "next/form"
-import Link from "next/link"
-import { redirect } from "next/navigation"
 
 export default function SignInPage() {
   const handleAction = async (f: FormData) => {
     if (await userSignIn(f)) {
-      toast({
-        title: "Success",
-        description: "You have successfully signed in",
-      })
+      toast("Success", { description: "You have successfully signed in" })
       redirect("/")
     }
 
-    toast({
-      title: "Error",
-      description: "Invalid credentials",
-      variant: "destructive",
-    })
+    toast("Error", { description: "Invalid credentials" })
   }
 
   return (
@@ -37,12 +31,12 @@ export default function SignInPage() {
         </CardHeader>
         <CardContent className="space-y-5">
           <Label className="block space-y-2">
-            <span>Username</span>
-            <Input type="text" placeholder="e.g admin" name="username" required />
+            <span className="block">Username</span>
+            <Input name="username" placeholder="e.g admin" required type="text" />
           </Label>
           <Label className="block space-y-2">
-            <span>Password</span>
-            <Input type="password" placeholder="e.g admin" name="password" required />
+            <span className="block">Password</span>
+            <Input name="password" placeholder="e.g admin" required type="password" />
           </Label>
           <SubmitButton text="Sign in" />
         </CardContent>

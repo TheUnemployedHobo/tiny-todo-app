@@ -1,7 +1,8 @@
 "use client"
 
-import { getClientAuthToken } from "@/lib/jwt-utils"
 import { create } from "zustand/react"
+
+import { getClientAuthToken } from "@/lib/jwt-utils"
 
 type StateType = {
   progress: number

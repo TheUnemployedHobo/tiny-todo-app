@@ -1,14 +1,15 @@
 "use client"
 
+import { ChevronRight } from "lucide-react"
+import dynamic from "next/dynamic"
+import { memo } from "react"
+
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { SidebarHeader, SidebarMenuButton } from "@/components/ui/sidebar"
 import useFetchFn from "@/hooks/use-fetch-fn"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { userGetUsername } from "@/lib/utils"
-import { ChevronRight } from "lucide-react"
-import dynamic from "next/dynamic"
-import { memo } from "react"
 
 const AppSidebarThemeSwitch = dynamic(() => import("../app-sidebar-theme-switch"), { ssr: false })
 const DeleteAccountModal = dynamic(() => import("./profile-delete"), { ssr: false })
@@ -43,7 +44,7 @@ function AppSidebarProfile() {
             <ChevronRight className="ml-auto" />
           </SidebarMenuButton>
         </PopoverTrigger>
-        <PopoverContent className="w-60 space-y-4" side={side} align={align}>
+        <PopoverContent align={align} className="w-60 space-y-4" side={side}>
           <AppSidebarThemeSwitch />
           <SignOutModal />
           <EditCredentialsForm />

@@ -1,8 +1,9 @@
 "use client"
 
+import { useTheme } from "next-themes"
+
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
-import { useTheme } from "next-themes"
 
 function AppSidebarThemeSwitch() {
   const { setTheme, theme } = useTheme()

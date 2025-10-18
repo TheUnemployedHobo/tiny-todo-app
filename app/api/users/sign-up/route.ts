@@ -1,7 +1,8 @@
+import bcrypt from "bcrypt"
+
 import db from "@/app/api/db"
 import { directories, users } from "@/app/api/db/schema"
 import { userBodySchema } from "@/app/api/zod-schema"
-import bcrypt from "bcrypt"
 
 export async function POST(req: Request) {
   try {
@@ -12,8 +13,8 @@ export async function POST(req: Request) {
     const [user] = await db
       .insert(users)
       .values({
-        username: body.username,
         password: hashedPass,
+        username: body.username,
       })
       .returning()
 

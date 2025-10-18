@@ -8,7 +8,7 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <section className="container relative">
+      <section className="relative container">
         <AppTopbar />
         {children}
       </section>

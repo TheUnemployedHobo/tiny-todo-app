@@ -1,13 +1,16 @@
 "use client"
 
-import useFiltering from "@/hooks/use-filtering"
-import { cn } from "@/lib/utils"
 import { compareAsc, compareDesc } from "date-fns"
 import { CircleSlash2 } from "lucide-react"
 import dynamic from "next/dynamic"
+
+import useFiltering from "@/hooks/use-filtering"
+import { cn } from "@/lib/utils"
+
+import type { TaskCardPropsType } from "./task-card-index"
+
 import BigMessage from "../helpers/big-message"
 import { ScrollArea } from "../ui/scroll-area"
-import type { TaskCardPropsType } from "./task-card-index"
 
 const TaskCard = dynamic(() => import("./task-card-index"), { ssr: false })
 
@@ -20,12 +23,12 @@ function TaskCardWrapper({ tasks }: PropsType) {
 
   const sortedTasks = structuredClone(tasks).sort((a, b) => {
     switch (sortBy) {
-      case "Order added":
-        return a.id - b.id
       case "Earlier first":
         return compareAsc(new Date(a.deadline), new Date(b.deadline))
       case "Later first":
         return compareDesc(new Date(a.deadline), new Date(b.deadline))
+      case "Order added":
+        return a.id - b.id
     }
   })
 
@@ -34,7 +37,7 @@ function TaskCardWrapper({ tasks }: PropsType) {
     : sortedTasks
 
   return (
-    <ScrollArea className="h-[calc(100vh-304px)] lg:h-[calc(100vh-236px)]">
+    <ScrollArea className="h-[calc(100vh-272px)] lg:h-[calc(100vh-208px)]">
       {finalData.length === 0 ? (
         <BigMessage Icon={<CircleSlash2 size={32} />} text="Empty." />
       ) : (

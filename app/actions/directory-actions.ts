@@ -12,9 +12,9 @@ export const directoryCreate = async (f: FormData) => {
   const { value } = cookie.get("token")!
 
   const response = await fetch(`${BASE_URL}/api/directories`, {
-    method: "POST",
-    headers: { authorization: value },
     body: JSON.stringify({ name }),
+    headers: { authorization: value },
+    method: "POST",
   })
 
   return response.ok
@@ -27,9 +27,9 @@ export const directoryEdit = async (f: FormData, id: number) => {
   const { value } = cookie.get("token")!
 
   const response = await fetch(`${BASE_URL}/api/directories/${id}`, {
-    method: "PUT",
-    headers: { authorization: value },
     body: JSON.stringify({ name }),
+    headers: { authorization: value },
+    method: "PUT",
   })
 
   revalidateTag("tasks")
@@ -42,8 +42,8 @@ export const directoryDelete = async (id: number) => {
   const { value } = cookie.get("token")!
 
   const response = await fetch(`${BASE_URL}/api/directories/${id}`, {
-    method: "DELETE",
     headers: { authorization: value },
+    method: "DELETE",
   })
 
   revalidateTag("tasks")

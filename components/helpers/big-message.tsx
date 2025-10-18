@@ -7,7 +7,7 @@ type PropsType = {
 
 function BigMessage({ Icon, text }: PropsType) {
   return (
-    <div className="absolute left-2/4 top-2/4 flex -translate-x-2/4 -translate-y-2/4 items-center gap-x-2">
+    <div className="absolute top-2/4 left-2/4 flex -translate-x-2/4 -translate-y-2/4 items-center gap-x-2">
       {Icon}
       {text && <h3 className="text-xl font-semibold">{text}</h3>}
     </div>

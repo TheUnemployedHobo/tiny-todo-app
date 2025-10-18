@@ -1,6 +1,7 @@
+import { notFound } from "next/navigation"
+
 import { taskGet } from "@/app/actions/task-actions"
 import TaskCardWrapper from "@/components/task-card/task-card-wrapper"
-import { notFound } from "next/navigation"
 
 type PropsType = { params: Promise<{ name: string }> }
 

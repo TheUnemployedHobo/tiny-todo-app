@@ -1,5 +1,7 @@
 "use client"
 
+import type { ReactNode } from "react"
+
 import {
   AlertDialogAction,
   AlertDialogCancel,
@@ -11,16 +13,15 @@ import {
   AlertDialogTrigger,
   AlertDialog as ShadcnAlertDialog,
 } from "@/components/ui/alert-dialog"
-import type { ReactNode } from "react"
 
 type PropsType = {
-  trigger: ReactNode
-  title?: string
-  description: string
   actionFn: () => void
+  description: string
+  title?: string
+  trigger: ReactNode
 }
 
-function AlertDialog({ trigger, title = "Are you absolutely sure?", description, actionFn }: PropsType) {
+function AlertDialog({ actionFn, description, title = "Are you absolutely sure?", trigger }: PropsType) {
   return (
     <ShadcnAlertDialog>
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>

@@ -1,8 +1,9 @@
+import bcrypt from "bcrypt"
+import { and, eq } from "drizzle-orm"
+
 import db from "@/app/api/db"
 import { users } from "@/app/api/db/schema"
 import { signJwToken } from "@/lib/jwt-utils"
-import bcrypt from "bcrypt"
-import { and, eq } from "drizzle-orm"
 
 export async function POST(req: Request) {
   try {

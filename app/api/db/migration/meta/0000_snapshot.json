@@ -1,5 +1,5 @@
 {
-  "id": "7f0562e3-3100-4ff4-ae82-373f792fa288",
+  "id": "387e8490-0ed4-4466-85c8-3c56b45c890a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -62,15 +62,16 @@
       "name": "tasks",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         },
-        "title": {
-          "name": "title",
-          "type": "varchar(35)",
+        "deadline": {
+          "name": "deadline",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true
         },
@@ -81,18 +82,17 @@
           "notNull": false,
           "default": "''"
         },
-        "deadline": {
-          "name": "deadline",
-          "type": "timestamp",
+        "directory_id": {
+          "name": "directory_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "is_important": {
-          "name": "is_important",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false,
-          "default": false
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
         },
         "is_completed": {
           "name": "is_completed",
@@ -101,18 +101,18 @@
           "notNull": false,
           "default": false
         },
-        "directory_id": {
-          "name": "directory_id",
-          "type": "integer",
+        "is_important": {
+          "name": "is_important",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(35)",
           "primaryKey": false,
           "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
         }
       },
       "indexes": {},
@@ -147,15 +147,15 @@
           "primaryKey": true,
           "notNull": true
         },
-        "username": {
-          "name": "username",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        },
         "password": {
           "name": "password",
           "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         }

@@ -1,8 +1,9 @@
 "use client"
 
-import { LoaderCircle } from "lucide-react"
 import { useFormStatus } from "react-dom"
+
 import { Button } from "../ui/button"
+import { Spinner } from "../ui/spinner"
 
 type SubmitButtonProps = {
   text: string
@@ -12,8 +13,8 @@ function SubmitButton({ text }: SubmitButtonProps) {
   const { pending } = useFormStatus()
 
   return (
-    <Button type="submit" className="w-full" disabled={pending}>
-      {pending && <LoaderCircle className="animate-spin" />}
+    <Button className="w-full" disabled={pending} type="submit">
+      {pending && <Spinner />}
       <span>{text}</span>
     </Button>
   )

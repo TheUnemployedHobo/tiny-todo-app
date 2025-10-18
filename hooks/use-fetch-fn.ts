@@ -3,14 +3,14 @@
 import { useCallback, useEffect, useState } from "react"
 
 export type FetchedDataType<T> = {
-  data: T | null
-  err: unknown | null
-  isLoading: boolean
+  data: null | T
+  err: null | unknown
   fetchData: () => Promise<void>
+  isLoading: boolean
 }
 
 const useFetchFn = <T>(fn: () => Promise<T>): FetchedDataType<T> => {
-  const [data, setData] = useState<T | null>(null)
+  const [data, setData] = useState<null | T>(null)
   const [err, setErr] = useState<unknown>(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -34,7 +34,7 @@ const useFetchFn = <T>(fn: () => Promise<T>): FetchedDataType<T> => {
     fetchData()
   }, [fetchData])
 
-  return { data, err, isLoading, fetchData }
+  return { data, err, fetchData, isLoading }
 }
 
 export default useFetchFn

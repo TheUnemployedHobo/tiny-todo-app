@@ -1,8 +1,22 @@
 import bcrypt from "bcrypt"
 import { eq } from "drizzle-orm"
+
 import db from "../db"
 import { users } from "../db/schema"
 import { updateUserBodySchema } from "../zod-schema"
+
+export async function DELETE(req: Request) {
+  try {
+    const userId = +req.headers.get("userId")!
+
+    await db.delete(users).where(eq(users.id, userId))
+
+    return new Response("Successful", { status: 200 })
+  } catch (error) {
+    console.error(error)
+    return new Response("Failed", { status: 500 })
+  }
+}
 
 export async function GET(req: Request) {
   try {
@@ -13,19 +27,6 @@ export async function GET(req: Request) {
     if (!user) return new Response("User not found", { status: 404 })
 
     return new Response(user.username, { status: 200 })
-  } catch (error) {
-    console.error(error)
-    return new Response("Failed", { status: 500 })
-  }
-}
-
-export async function DELETE(req: Request) {
-  try {
-    const userId = +req.headers.get("userId")!
-
-    await db.delete(users).where(eq(users.id, userId))
-
-    return new Response("Successful", { status: 200 })
   } catch (error) {
     console.error(error)
     return new Response("Failed", { status: 500 })

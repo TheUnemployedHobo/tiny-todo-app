@@ -1,4 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc"
+import perfectionist from "eslint-plugin-perfectionist"
 import { dirname } from "path"
 import { fileURLToPath } from "url"
 
@@ -9,6 +10,12 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 })
 
-const eslintConfig = [...compat.extends("next/core-web-vitals", "next/typescript")]
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"],
+  },
+  perfectionist.configs["recommended-natural"],
+]
 
 export default eslintConfig

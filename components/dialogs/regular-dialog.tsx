@@ -1,5 +1,7 @@
 "use client"
 
+import type { ReactNode } from "react"
+
 import {
   Dialog,
   DialogContent,
@@ -9,22 +11,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import type { ReactNode } from "react"
 
 type PropsType = {
-  title: string
-  description?: string
-  trigger: ReactNode
   content: ReactNode
   control?: {
-    open: boolean
     onOpenChange: (open: boolean) => void
+    open: boolean
   }
+  description?: string
+  title: string
+  trigger: ReactNode
 }
 
-function RegularDialog({ title, description, content, trigger, control }: PropsType) {
+function RegularDialog({ content, control, description, title, trigger }: PropsType) {
   return (
-    <Dialog open={control?.open} onOpenChange={control?.onOpenChange}>
+    <Dialog onOpenChange={control?.onOpenChange} open={control?.open}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

@@ -1,6 +1,7 @@
-import { clsx, type ClassValue } from "clsx"
+import { type ClassValue, clsx } from "clsx"
 import { format } from "date-fns"
 import { twMerge } from "tailwind-merge"
+
 import { getClientAuthToken } from "./jwt-utils"
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs))

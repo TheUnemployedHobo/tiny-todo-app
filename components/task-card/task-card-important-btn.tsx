@@ -1,7 +1,8 @@
-import { taskImportant } from "@/app/actions/task-actions"
-import { Button } from "@/components/ui/button"
 import { Star } from "lucide-react"
 import { startTransition, useOptimistic } from "react"
+
+import { taskImportant } from "@/app/actions/task-actions"
+import { Button } from "@/components/ui/button"
 
 type PropsType = {
   id: number
@@ -18,8 +19,8 @@ function TaskCardImportantBtn({ id, isImportant }: PropsType) {
     })
 
   return (
-    <Button size="icon" variant="ghost" onClick={handleAction}>
-      <Star fill={important ? "hsl(var(--foreground))" : "transparent"} />
+    <Button onClick={handleAction} size="icon" variant="ghost">
+      <Star fill={important ? "var(--foreground)" : "transparent"} />
     </Button>
   )
 }

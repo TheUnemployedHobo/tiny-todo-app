@@ -1,7 +1,8 @@
 "use client"
 
-import { getClientAuthToken } from "@/lib/jwt-utils"
 import { create } from "zustand/react"
+
+import { getClientAuthToken } from "@/lib/jwt-utils"
 
 export type DirsType = { id: number; name: string; userId: number }[]
 

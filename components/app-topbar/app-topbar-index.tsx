@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import useFiltering from "@/hooks/use-filtering"
 import { formatDate } from "@/lib/utils"
+
 import AddTask from "./app-topbar-add-task"
 import AppTopbarFilter from "./app-topbar-filter"
 import AppTopbarTitle from "./app-topbar-title"
@@ -17,21 +18,21 @@ function AppTopbar() {
       <nav className="flex items-center justify-between gap-x-2">
         <SidebarTrigger className="md:hidden" />
         <Input
-          type="search"
-          placeholder="Search for tasks"
           className="hidden w-1/4 lg:block"
-          value={search}
           onChange={(e) => updateSearch(e.currentTarget.value)}
+          placeholder="Search for tasks"
+          type="search"
+          value={search}
         />
         <span className="text-sm sm:text-base">{formatDate(new Date())}</span>
         <AddTask />
       </nav>
       <Input
-        type="search"
-        placeholder="Search for tasks"
         className="lg:hidden"
-        value={search}
         onChange={(e) => updateSearch(e.currentTarget.value)}
+        placeholder="Search for tasks"
+        type="search"
+        value={search}
       />
       <AppTopbarTitle />
       <AppTopbarFilter />

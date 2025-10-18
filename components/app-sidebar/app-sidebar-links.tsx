@@ -1,21 +1,22 @@
 "use client"
 
-import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 import { CircleCheck, CircleX, LayoutGrid, Star } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+import { SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
+
 const links = [
-  { id: 1, title: "All tasks", icon: <LayoutGrid />, url: "/" },
-  { id: 2, title: "Important tasks", icon: <Star />, url: "/important" },
-  { id: 3, title: "Completed tasks", icon: <CircleCheck />, url: "/completed" },
-  { id: 4, title: "Uncompleted tasks", icon: <CircleX />, url: "/uncompleted" },
+  { icon: <LayoutGrid />, id: 1, title: "All tasks", url: "/" },
+  { icon: <Star />, id: 2, title: "Important tasks", url: "/important" },
+  { icon: <CircleCheck />, id: 3, title: "Completed tasks", url: "/completed" },
+  { icon: <CircleX />, id: 4, title: "Uncompleted tasks", url: "/uncompleted" },
 ]
 
 function AppSidebarLinks() {
   const pathname = usePathname()
 
-  return links.map(({ id, title, icon, url }) => (
+  return links.map(({ icon, id, title, url }) => (
     <SidebarMenuItem key={id}>
       <SidebarMenuButton asChild isActive={pathname === url}>
         <Link href={url}>

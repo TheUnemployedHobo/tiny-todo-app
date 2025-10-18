@@ -6,20 +6,20 @@ CREATE TABLE "directories" (
 );
 --> statement-breakpoint
 CREATE TABLE "tasks" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"title" varchar(35) NOT NULL,
-	"description" varchar(100) DEFAULT '',
+	"created_at" timestamp DEFAULT now() NOT NULL,
 	"deadline" timestamp NOT NULL,
-	"is_important" boolean DEFAULT false,
-	"is_completed" boolean DEFAULT false,
+	"description" varchar(100) DEFAULT '',
 	"directory_id" integer NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL
+	"id" serial PRIMARY KEY NOT NULL,
+	"is_completed" boolean DEFAULT false,
+	"is_important" boolean DEFAULT false,
+	"title" varchar(35) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "users" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"username" varchar(100) NOT NULL,
 	"password" text NOT NULL,
+	"username" varchar(100) NOT NULL,
 	CONSTRAINT "users_username_unique" UNIQUE("username")
 );
 --> statement-breakpoint
