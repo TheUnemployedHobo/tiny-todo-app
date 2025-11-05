@@ -3,8 +3,8 @@
 import { compareAsc, compareDesc } from "date-fns"
 import { CircleSlash2 } from "lucide-react"
 import dynamic from "next/dynamic"
+import { useSearchParams } from "next/navigation"
 
-import useFiltering from "@/hooks/use-filtering"
 import { cn } from "@/lib/utils"
 
 import type { TaskCardPropsType } from "./task-card-index"
@@ -17,10 +17,13 @@ const TaskCard = dynamic(() => import("./task-card-index"), { ssr: false })
 type PropsType = { tasks: TaskCardPropsType[] }
 
 function TaskCardWrapper({ tasks }: PropsType) {
-  const renderMode = useFiltering((state) => state.renderMode)
-  const sortBy = useFiltering((state) => state.sortBy)
-  const search = useFiltering((state) => state.search)
+  const searchParams = useSearchParams()
 
+  const search = searchParams.get("search")
+  const renderMode = searchParams.get("renderMode")
+  const sortBy = searchParams.get("sortBy")
+
+  //@ts-expect-error Nothing happens, I promise!
   const sortedTasks = structuredClone(tasks).sort((a, b) => {
     switch (sortBy) {
       case "Earlier first":
