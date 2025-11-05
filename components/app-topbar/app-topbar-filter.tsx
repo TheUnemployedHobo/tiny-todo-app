@@ -2,7 +2,7 @@
 
 import { LayoutList, List } from "lucide-react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { startTransition, useCallback, useEffect, useEffectEvent, useState } from "react"
+import { startTransition, useCallback } from "react"
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
@@ -40,7 +40,7 @@ function AppTopbarFilter() {
         className="hidden sm:block"
         onValueChange={(value: "grid" | "list") => value && setRenderMode(value)}
         type="single"
-        value={searchParams.get("renderMode")!}
+        value={searchParams.get("renderMode") ?? "grid"}
         variant="outline"
       >
         <ToggleGroupItem value="grid">
@@ -52,7 +52,10 @@ function AppTopbarFilter() {
           <span>List view</span>
         </ToggleGroupItem>
       </ToggleGroup>
-      <Select onValueChange={(value: SelectOptionsType) => setSortBy(value)} value={searchParams.get("sortBy")!}>
+      <Select
+        onValueChange={(value: SelectOptionsType) => setSortBy(value)}
+        value={searchParams.get("sortBy") ?? "Order added"}
+      >
         <SelectTrigger className="w-full sm:w-44">
           <SelectValue placeholder="Sort by" />
         </SelectTrigger>
