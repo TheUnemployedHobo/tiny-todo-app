@@ -24,9 +24,11 @@ function AppTopbarFilter() {
       >
         <ToggleGroupItem value="grid">
           <LayoutList />
+          <span>Grid view</span>
         </ToggleGroupItem>
         <ToggleGroupItem value="list">
           <List />
+          <span>List view</span>
         </ToggleGroupItem>
       </ToggleGroup>
       <Select onValueChange={updateSortBy} value={sortBy}>

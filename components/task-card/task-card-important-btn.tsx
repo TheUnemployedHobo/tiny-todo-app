@@ -1,7 +1,7 @@
 import { Star } from "lucide-react"
 import { startTransition, useOptimistic } from "react"
 
-import { taskImportant } from "@/app/actions/task-actions"
+import { taskImportant } from "@/actions/task-actions"
 import { Button } from "@/components/ui/button"
 
 type PropsType = {

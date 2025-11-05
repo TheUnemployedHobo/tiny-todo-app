@@ -4,7 +4,7 @@ import Form from "next/form"
 import { memo, useState } from "react"
 import { toast } from "sonner"
 
-import { taskCreate } from "@/app/actions/task-actions"
+import { taskCreate } from "@/actions/task-actions"
 import RegularDialog from "@/components/dialogs/regular-dialog"
 import DatePicker from "@/components/helpers/date-picker"
 import { Button } from "@/components/ui/button"
@@ -25,9 +25,9 @@ function AddTask() {
 
   const handleAction = async (f: FormData) => {
     if (await taskCreate(f)) {
-      toast("Success", { description: "Task created successfully." })
+      toast.success("Task created successfully.")
       setIsOpen(false)
-    } else toast("Error", { description: "Failed to create task." })
+    } else toast.error("Failed to create task.")
   }
 
   return (

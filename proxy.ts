@@ -10,7 +10,7 @@ const signOut = (req: NextRequest) => {
   return response
 }
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname
 
   const isPublicApiRoute = ["/api/users/sign-in", "/api/users/sign-up"].some((route) => path === route)

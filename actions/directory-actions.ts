@@ -32,7 +32,7 @@ export const directoryEdit = async (f: FormData, id: number) => {
     method: "PUT",
   })
 
-  revalidateTag("tasks")
+  revalidateTag("tasks", "max")
 
   return response.ok
 }
@@ -46,7 +46,7 @@ export const directoryDelete = async (id: number) => {
     method: "DELETE",
   })
 
-  revalidateTag("tasks")
+  revalidateTag("tasks", "max")
 
   return response.ok
 }

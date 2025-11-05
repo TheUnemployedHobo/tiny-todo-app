@@ -3,7 +3,7 @@
 import { Trash } from "lucide-react"
 import { toast } from "sonner"
 
-import { directoryDelete } from "@/app/actions/directory-actions"
+import { directoryDelete } from "@/actions/directory-actions"
 import AlertDialog from "@/components/dialogs/alert-dialog"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import useDirectories from "@/hooks/use-directories"
@@ -13,9 +13,9 @@ function DeleteDirectory({ id }: { id: number }) {
 
   const handleAction = async () => {
     if (await directoryDelete(id)) {
-      toast("Directory deleted", { description: "The directory and all its tasks have been successfully deleted." })
+      toast.success("The directory and all its tasks have been successfully deleted.")
       refresh()
-    } else toast("Deletion failed", { description: "The directory could not be deleted." })
+    } else toast.error("The directory could not be deleted.")
   }
 
   return (

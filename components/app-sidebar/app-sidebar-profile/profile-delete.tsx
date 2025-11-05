@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation"
 import { toast } from "sonner"
 
-import { userDeleteAcc } from "@/app/actions/user-actions"
+import { userDeleteAcc } from "@/actions/user-actions"
 import AlertDialog from "@/components/dialogs/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { deleteCookie } from "@/lib/utils"
@@ -11,14 +11,12 @@ import { deleteCookie } from "@/lib/utils"
 function DeleteAccountModal() {
   const handleClick = async () => {
     if (await userDeleteAcc()) {
-      toast("Account deleted", { description: "You're now signed out and your account is deleted" })
-
+      toast.success("Account deleted successfully.")
       deleteCookie("token")
-
       redirect("/sign-in")
     }
 
-    toast("Failed to delete account", { description: "Please try again later" })
+    toast.error("Failed to delete account")
   }
 
   return (
