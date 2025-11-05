@@ -33,7 +33,7 @@ function AddTask() {
   return (
     <RegularDialog
       content={
-        <Form action={handleAction} className="flex flex-grow flex-col gap-y-5">
+        <Form action={handleAction} className="flex grow flex-col gap-y-5">
           <Label className="block space-y-2">
             <span className="block">Title</span>
             <Input
