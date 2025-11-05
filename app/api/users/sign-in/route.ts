@@ -20,7 +20,7 @@ export async function POST(req: Request) {
 
     if (!isPassCorrect) return new Response("Incorrect credentials", { status: 401 })
 
-    const jwtToken = await signJwToken(availableUser.id)
+    const jwtToken = signJwToken(availableUser.id)
 
     return new Response(jwtToken, { status: 200 })
   } catch (error) {

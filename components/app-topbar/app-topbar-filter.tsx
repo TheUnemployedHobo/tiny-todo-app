@@ -2,7 +2,7 @@
 
 import { LayoutList, List } from "lucide-react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { startTransition, useEffect, useEffectEvent, useState } from "react"
+import { startTransition, useCallback, useEffect, useEffectEvent, useState } from "react"
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
@@ -12,23 +12,27 @@ const selectOptions = ["Order added", "Earlier first", "Later first"] as const
 type SelectOptionsType = (typeof selectOptions)[number]
 
 function AppTopbarFilter() {
-  const [renderMode, setRenderMode] = useState<"grid" | "list">("grid")
-  const [sortBy, setSortBy] = useState<SelectOptionsType>("Order added")
-
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const updateUrl = useEffectEvent(() => {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set("renderMode", renderMode)
-    params.set("sortBy", sortBy)
-    startTransition(() => router.replace(`${pathname}?${params.toString()}`))
-  })
+  const setRenderMode = useCallback(
+    (mode: "grid" | "list") => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set("renderMode", mode)
+      startTransition(() => router.replace(`${pathname}?${params.toString()}`))
+    },
+    [pathname, router, searchParams],
+  )
 
-  useEffect(() => {
-    updateUrl()
-  }, [renderMode, sortBy])
+  const setSortBy = useCallback(
+    (mode: SelectOptionsType) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set("sortBy", mode)
+      startTransition(() => router.replace(`${pathname}?${params.toString()}`))
+    },
+    [pathname, router, searchParams],
+  )
 
   return (
     <div className="flex justify-between">
@@ -36,7 +40,7 @@ function AppTopbarFilter() {
         className="hidden sm:block"
         onValueChange={(value: "grid" | "list") => value && setRenderMode(value)}
         type="single"
-        value={renderMode}
+        value={searchParams.get("renderMode")!}
         variant="outline"
       >
         <ToggleGroupItem value="grid">
@@ -48,7 +52,7 @@ function AppTopbarFilter() {
           <span>List view</span>
         </ToggleGroupItem>
       </ToggleGroup>
-      <Select onValueChange={(value: SelectOptionsType) => setSortBy(value)} value={sortBy}>
+      <Select onValueChange={(value: SelectOptionsType) => setSortBy(value)} value={searchParams.get("sortBy")!}>
         <SelectTrigger className="w-full sm:w-44">
           <SelectValue placeholder="Sort by" />
         </SelectTrigger>
