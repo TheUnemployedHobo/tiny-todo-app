@@ -5,6 +5,6 @@ export default defineConfig({
     url: process.env["POSTGRES_URL"]!,
   },
   dialect: "postgresql",
-  out: "./app/api/db/migration",
-  schema: "./app/api/db/schema.ts",
+  out: "./app/lib/db/migration",
+  schema: "./app/lib/db/schema.ts",
 })

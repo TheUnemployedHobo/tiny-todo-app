@@ -5,7 +5,7 @@ import Form from "next/form"
 import { useState } from "react"
 import { toast } from "sonner"
 
-import { directoryCreate } from "@/app/actions/directory-actions"
+import { directoryCreate } from "@/actions/directory-actions"
 import RegularDialog from "@/components/dialogs/regular-dialog"
 import SubmitButton from "@/components/helpers/submit-button"
 import { Input } from "@/components/ui/input"
@@ -19,10 +19,10 @@ function CreateDirectory() {
 
   const handleAction = async (f: FormData) => {
     if (await directoryCreate(f)) {
-      toast("Success", { description: `Directory created successfully.` })
+      toast.success("Directory created successfully.")
       refresh()
       setIsOpen(false)
-    } else toast("Error", { description: "Failed to create directory." })
+    } else toast.error("Failed to create directory.")
   }
 
   return (

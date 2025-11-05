@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt"
 
-import db from "@/app/api/db"
-import { directories, users } from "@/app/api/db/schema"
+import db from "@/lib/db"
+import { directories, users } from "@/lib/db/schema"
 import { userBodySchema } from "@/app/api/zod-schema"
 
 export async function POST(req: Request) {

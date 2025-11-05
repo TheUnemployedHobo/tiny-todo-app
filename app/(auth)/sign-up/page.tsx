@@ -5,7 +5,7 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 import { toast } from "sonner"
 
-import { userSignUp } from "@/app/actions/user-actions"
+import { userSignUp } from "@/actions/user-actions"
 import SubmitButton from "@/components/helpers/submit-button"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -19,9 +19,9 @@ export default function SignUpPage() {
 
     if (password !== confirmPassword) toast("Error", { description: "Passwords do not match" })
     else if (await userSignUp(f)) {
-      toast("Successful", { description: "Account created successfully, now you can sign in" })
+      toast.success("Account created successfully, now you can sign in")
       redirect("/sign-in")
-    } else toast("Error", { description: "Failed to sign up" })
+    } else toast.error("Failed to sign up")
   }
 
   return (

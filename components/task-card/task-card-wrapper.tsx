@@ -3,8 +3,8 @@
 import { compareAsc, compareDesc } from "date-fns"
 import { CircleSlash2 } from "lucide-react"
 import dynamic from "next/dynamic"
+import { useSearchParams } from "next/navigation"
 
-import useFiltering from "@/hooks/use-filtering"
 import { cn } from "@/lib/utils"
 
 import type { TaskCardPropsType } from "./task-card-index"
@@ -17,10 +17,13 @@ const TaskCard = dynamic(() => import("./task-card-index"), { ssr: false })
 type PropsType = { tasks: TaskCardPropsType[] }
 
 function TaskCardWrapper({ tasks }: PropsType) {
-  const renderMode = useFiltering((state) => state.renderMode)
-  const sortBy = useFiltering((state) => state.sortBy)
-  const search = useFiltering((state) => state.search)
+  const searchParams = useSearchParams()
 
+  const search = searchParams.get("search")
+  const renderMode = searchParams.get("renderMode")
+  const sortBy = searchParams.get("sortBy")
+
+  //@ts-expect-error Nothing happens, I promise!
   const sortedTasks = structuredClone(tasks).sort((a, b) => {
     switch (sortBy) {
       case "Earlier first":
@@ -37,14 +40,15 @@ function TaskCardWrapper({ tasks }: PropsType) {
     : sortedTasks
 
   return (
-    <ScrollArea className="h-[calc(100vh-272px)] lg:h-[calc(100vh-208px)]">
+    <ScrollArea className="h-[calc(100dvh-272px)] lg:h-[calc(100dvh-208px)]">
       {finalData.length === 0 ? (
         <BigMessage Icon={<CircleSlash2 size={32} />} text="Empty." />
       ) : (
         <section
           className={cn(
-            renderMode === "grid" && "grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4",
-            renderMode === "list" && "flex flex-col gap-y-5",
+            renderMode === "list"
+              ? "flex flex-col gap-y-5"
+              : "grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4",
           )}
         >
           {finalData.map((task) => (

@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt"
 import { and, eq } from "drizzle-orm"
 
-import db from "@/app/api/db"
-import { users } from "@/app/api/db/schema"
+import db from "@/lib/db"
+import { users } from "@/lib/db/schema"
 import { signJwToken } from "@/lib/jwt-utils"
 
 export async function POST(req: Request) {
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
 
     if (!isPassCorrect) return new Response("Incorrect credentials", { status: 401 })
 
-    const jwtToken = await signJwToken(availableUser.id)
+    const jwtToken = signJwToken(availableUser.id)
 
     return new Response(jwtToken, { status: 200 })
   } catch (error) {

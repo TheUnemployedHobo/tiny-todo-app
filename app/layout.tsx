@@ -11,7 +11,6 @@ const font = Poppins({
   display: "block",
   style: "normal",
   subsets: ["latin"],
-  variable: "--font-poppins",
   weight: ["400", "500", "700"],
 })
 

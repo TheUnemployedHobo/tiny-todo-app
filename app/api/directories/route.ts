@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm"
 
-import db from "../db"
-import { directories } from "../db/schema"
+import db from "../../../lib/db"
+import { directories } from "../../../lib/db/schema"
 import { dirBodySchema } from "../zod-schema"
 
 export async function GET(req: Request) {

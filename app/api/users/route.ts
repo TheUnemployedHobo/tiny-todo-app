@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt"
 import { eq } from "drizzle-orm"
 
-import db from "../db"
-import { users } from "../db/schema"
+import db from "../../../lib/db"
+import { users } from "../../../lib/db/schema"
 import { updateUserBodySchema } from "../zod-schema"
 
 export async function DELETE(req: Request) {

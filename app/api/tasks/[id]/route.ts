@@ -1,8 +1,8 @@
 import { parseISO } from "date-fns"
 import { eq, sql } from "drizzle-orm"
 
-import db from "@/app/api/db"
-import { tasks } from "@/app/api/db/schema"
+import db from "@/lib/db"
+import { tasks } from "@/lib/db/schema"
 import { taskBodySchema } from "@/app/api/zod-schema"
 
 type PropsType = { params: Promise<{ id: string }> }

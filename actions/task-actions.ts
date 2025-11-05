@@ -1,6 +1,6 @@
 "use server"
 
-import { revalidateTag } from "next/cache"
+import { updateTag } from "next/cache"
 import { cookies } from "next/headers"
 
 const BASE_URL = process.env["NEXT_PUBLIC_BASE_URL"]!
@@ -53,7 +53,7 @@ export const taskCreate = async (f: FormData) => {
     method: "POST",
   })
 
-  revalidateTag("tasks")
+  updateTag("tasks")
 
   return response.ok
 }
@@ -80,7 +80,7 @@ export const taskEdit = async (id: number, f: FormData) => {
     method: "PUT",
   })
 
-  revalidateTag("tasks")
+  updateTag("tasks")
 
   return response.ok
 }
@@ -97,7 +97,7 @@ export const taskComplete = async (id: number, isCompleted: boolean) => {
     method: "PUT",
   })
 
-  revalidateTag("tasks")
+  updateTag("tasks")
 
   return response.ok
 }
@@ -114,7 +114,7 @@ export const taskImportant = async (id: number, isImportant: boolean) => {
     method: "PUT",
   })
 
-  revalidateTag("tasks")
+  updateTag("tasks")
 
   return response.ok
 }
@@ -128,7 +128,7 @@ export const taskDelete = async (id: number) => {
     method: "DELETE",
   })
 
-  revalidateTag("tasks")
+  updateTag("tasks")
 
   return response.ok
 }

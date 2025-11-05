@@ -9,7 +9,6 @@ import { deleteCookie } from "@/lib/utils"
 function SignOutModal() {
   const handleClick = () => {
     deleteCookie("token")
-
     redirect("/sign-in")
   }
 

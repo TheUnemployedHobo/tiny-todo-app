@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm"
 
-import db from "@/app/api/db"
-import { directories } from "@/app/api/db/schema"
+import db from "@/lib/db"
+import { directories } from "@/lib/db/schema"
 import { dirBodySchema } from "@/app/api/zod-schema"
 
 type PropsType = { params: Promise<{ id: string }> }

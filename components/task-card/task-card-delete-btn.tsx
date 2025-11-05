@@ -1,7 +1,7 @@
 import { Trash } from "lucide-react"
 import { toast } from "sonner"
 
-import { taskDelete } from "@/app/actions/task-actions"
+import { taskDelete } from "@/actions/task-actions"
 import AlertDialog from "@/components/dialogs/alert-dialog"
 import { Button } from "@/components/ui/button"
 
@@ -9,8 +9,8 @@ type PropsType = { id: number }
 
 function TaskCardDeleteBtn({ id }: PropsType) {
   const handleAction = async () => {
-    if (await taskDelete(id)) toast("Deletion success", { description: "The task has been successfully deleted." })
-    else toast("Deletion failed", { description: "There was an error deleting the task. Please try again." })
+    if (await taskDelete(id)) toast.success("The task has been successfully deleted.")
+    else toast.error("There was an error deleting the task.")
   }
 
   return (

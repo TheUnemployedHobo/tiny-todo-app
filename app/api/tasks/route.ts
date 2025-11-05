@@ -2,8 +2,8 @@ import type { NextRequest } from "next/server"
 
 import { eq } from "drizzle-orm"
 
-import db from "../db"
-import { directories, tasks } from "../db/schema"
+import db from "../../../lib/db"
+import { directories, tasks } from "../../../lib/db/schema"
 
 export async function GET(req: NextRequest) {
   try {

@@ -5,7 +5,7 @@ import Form from "next/form"
 import { memo, useState } from "react"
 import { toast } from "sonner"
 
-import { taskEdit } from "@/app/actions/task-actions"
+import { taskEdit } from "@/actions/task-actions"
 import RegularDialog from "@/components/dialogs/regular-dialog"
 import { Button } from "@/components/ui/button"
 
@@ -23,15 +23,15 @@ function TaskCardEditBtn(props: TaskCardPropsType) {
 
   const handleAction = async (f: FormData) => {
     if (await taskEdit(props.id, f)) {
-      toast("Success", { description: "The task has been successfully updated." })
+      toast.success("The task has been successfully updated.")
       setIsOpen(false)
-    } else toast("Error", { description: "There was an error updating the task. Please try again." })
+    } else toast.error("There was an error updating the task.")
   }
 
   return (
     <RegularDialog
       content={
-        <Form action={handleAction} className="flex flex-grow flex-col gap-y-5">
+        <Form action={handleAction} className="flex grow flex-col gap-y-5">
           <Label className="block space-y-2">
             <span className="block">Title</span>
             <Input

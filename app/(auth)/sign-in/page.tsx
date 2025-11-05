@@ -5,7 +5,7 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 import { toast } from "sonner"
 
-import { userSignIn } from "@/app/actions/user-actions"
+import { userSignIn } from "@/actions/user-actions"
 import SubmitButton from "@/components/helpers/submit-button"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -15,11 +15,11 @@ import { Label } from "@/components/ui/label"
 export default function SignInPage() {
   const handleAction = async (f: FormData) => {
     if (await userSignIn(f)) {
-      toast("Success", { description: "You have successfully signed in" })
+      toast.success("You have successfully signed in")
       redirect("/")
     }
 
-    toast("Error", { description: "Invalid credentials" })
+    toast.error("Invalid credentials")
   }
 
   return (
