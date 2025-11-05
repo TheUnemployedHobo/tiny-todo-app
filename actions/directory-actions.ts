@@ -1,6 +1,6 @@
 "use server"
 
-import { revalidateTag } from "next/cache"
+import { revalidateTag, updateTag } from "next/cache"
 import { cookies } from "next/headers"
 
 const BASE_URL = process.env["NEXT_PUBLIC_BASE_URL"]!
@@ -32,7 +32,7 @@ export const directoryEdit = async (f: FormData, id: number) => {
     method: "PUT",
   })
 
-  revalidateTag("tasks", "max")
+  updateTag("tasks")
 
   return response.ok
 }
@@ -46,7 +46,7 @@ export const directoryDelete = async (id: number) => {
     method: "DELETE",
   })
 
-  revalidateTag("tasks", "max")
+  updateTag("tasks")
 
   return response.ok
 }
