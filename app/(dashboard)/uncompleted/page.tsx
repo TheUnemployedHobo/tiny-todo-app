@@ -2,9 +2,7 @@ import { taskGet } from "@/actions/task-actions"
 import TaskCardWrapper from "@/components/task-card/task-card-wrapper"
 
 export default async function Page() {
-  const tasks = await taskGet()
+  const tasks = await taskGet("uncompleted")
 
-  const uncompletedTasks = tasks.filter(({ isCompleted }) => !isCompleted)
-
-  return <TaskCardWrapper tasks={uncompletedTasks} />
+  return <TaskCardWrapper tasks={tasks} />
 }

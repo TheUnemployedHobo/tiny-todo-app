@@ -1,15 +1,16 @@
 import type { NextRequest } from "next/server"
 
-import { eq } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 
-import db from "../../../lib/db"
-import { directories, tasks } from "../../../lib/db/schema"
+import db from "@/lib/db"
+import { directories, tasks } from "@/lib/db/schema"
 
 export async function GET(req: NextRequest) {
   try {
     const userId = +req.headers.get("userId")!
     const offset = req.nextUrl.searchParams.get("offset")
     const limit = req.nextUrl.searchParams.get("limit")
+    const filterBy = req.nextUrl.searchParams.get("filterBy")
 
     const tasksByUser = await db
       .select({
@@ -24,7 +25,15 @@ export async function GET(req: NextRequest) {
       })
       .from(tasks)
       .innerJoin(directories, eq(tasks.directoryId, directories.id))
-      .where(eq(directories.userId, userId))
+      .where(
+        filterBy === "completed"
+          ? and(eq(directories.userId, userId), eq(tasks.isCompleted, true))
+          : filterBy === "uncompleted"
+            ? and(eq(directories.userId, userId), eq(tasks.isCompleted, false))
+            : filterBy === "important"
+              ? and(eq(directories.userId, userId), eq(tasks.isImportant, true))
+              : eq(directories.userId, userId),
+      )
       .offset(Number(offset || 0))
       .limit(Number(limit || -1))
 

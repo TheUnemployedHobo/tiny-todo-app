@@ -5,11 +5,11 @@ import { cookies } from "next/headers"
 
 const BASE_URL = process.env["NEXT_PUBLIC_BASE_URL"]!
 
-export const taskGet = async () => {
+export const taskGet = async (filterBy?: "completed" | "important" | "uncompleted") => {
   const cookie = await cookies()
   const { value } = cookie.get("token")!
 
-  const response = await fetch(`${BASE_URL}/api/tasks`, {
+  const response = await fetch(`${BASE_URL}/api/tasks?filterBy=${filterBy}`, {
     headers: { authorization: value },
     next: { tags: ["tasks"] },
   })

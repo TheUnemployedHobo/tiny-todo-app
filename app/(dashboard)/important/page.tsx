@@ -2,9 +2,7 @@ import { taskGet } from "@/actions/task-actions"
 import TaskCardWrapper from "@/components/task-card/task-card-wrapper"
 
 export default async function Page() {
-  const tasks = await taskGet()
+  const tasks = await taskGet("important")
 
-  const important = tasks.filter(({ isImportant }) => isImportant)
-
-  return <TaskCardWrapper tasks={important} />
+  return <TaskCardWrapper tasks={tasks} />
 }
