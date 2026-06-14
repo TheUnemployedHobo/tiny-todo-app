@@ -32,11 +32,11 @@ export default function SignInPage() {
         <CardContent className="space-y-5">
           <Label className="block space-y-2">
             <span className="block">Username</span>
-            <Input name="username" placeholder="e.g admin" required type="text" value="admin" />
+            <Input name="username" placeholder="e.g admin" required type="text" defaultValue="admin" />
           </Label>
           <Label className="block space-y-2">
             <span className="block">Password</span>
-            <Input name="password" placeholder="e.g admin" required type="password" value="admin" />
+            <Input name="password" placeholder="e.g admin" required type="password" defaultValue="admin" />
           </Label>
           <SubmitButton text="Sign in" />
         </CardContent>
